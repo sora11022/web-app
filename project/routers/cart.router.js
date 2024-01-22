@@ -8,6 +8,7 @@ const {
   getCart,
   deleteAndUpdateItem,
   incrementItem,
+  removeItem,
 } = require('../controllers/cart.controller');
 
 router
@@ -16,6 +17,7 @@ router
   .get(asyncMiddleware(authMiddleware), asyncMiddleware(getCart))
   .put(asyncMiddleware(authMiddleware), asyncMiddleware(deleteAndUpdateItem));
 router
-  .route('/pl/:userId')
+  .route('/adj/:userId')
   .put(asyncMiddleware(authMiddleware), asyncMiddleware(incrementItem))
+  .put(asyncMiddleware(authMiddleware),asyncMiddleware(removeItem));
 module.exports = router;

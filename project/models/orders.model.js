@@ -15,10 +15,6 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    totalPrice: {
-      type: String,
-      required: false,
-    },
     orderStatus: {
       type: String,
       enum: [

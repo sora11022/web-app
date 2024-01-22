@@ -10,6 +10,10 @@ const cartSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    totalPrice: {
+      type: Number,
+      default: false,
+    },
     items: [
       {
         productId: {
@@ -20,6 +24,10 @@ const cartSchema = mongoose.Schema(
         quantity: {
           type: Number,
           required: true,
+        },
+        price: {
+          type: Number,
+          default: 0,
         },
       },
     ],
