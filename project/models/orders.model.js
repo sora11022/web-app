@@ -15,6 +15,18 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    orderItem: [
+      {
+        quantity: {
+          type: Number,
+          required: true,
+        },
+        productId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'product',
+        },
+      },
+    ],
     orderStatus: {
       type: String,
       enum: [
@@ -37,7 +49,7 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'cart',
     },
-    shipperId: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     },

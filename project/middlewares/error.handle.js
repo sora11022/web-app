@@ -28,7 +28,7 @@ module.exports = (err, req, res, next) => {
 
   if (err?.code === 11000) {
     error.statusCode = 400;
-    error.message = 'Tài khoản đã tồn tại';
+    error.message = 'Dữ liệu đã tồn tại';
   }
 
   const statusCode = error.statusCode || 500;

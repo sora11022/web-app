@@ -22,7 +22,7 @@ module.exports = {
     const saveProduct = await productModel.create(value);
     return res.status(201).json(saveProduct);
   },
-  getProduct: async (req, res) => {
+  getProducts: async (req, res) => {
     const perPage = 10;
     let page = parseInt(req.query.page) || 1;
 
@@ -50,7 +50,7 @@ module.exports = {
       .populate('categoryId', 'name');
     return res.status(200).json(product);
   },
-  getProductByCategoryId: async (req, res) => {
+  getProductsByCategoryId: async (req, res) => {
     const categoryId = req.params.category_Id;
     const bodyQuery = { categoryId };
     const perPage = 10;

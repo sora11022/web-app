@@ -47,13 +47,11 @@ module.exports = {
   },
   getCart: async (req, res) => {
     const userId = req.params.userId;
-    const isOrdered = req.query.order;
+    const isOrdered = req.query.order || false;
     const findCartById = {
       userId: userId,
     };
-    if (isOrdered) {
-      findCartById.isOrdered = isOrdered;
-    }
+    findCartById.isOrdered = isOrdered;
     const getCart = await cartModel
       .findOne(findCartById)
       .populate('items.productId');

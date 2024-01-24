@@ -8,9 +8,9 @@ const typeRole = require('../constants/type.role');
 
 const {
   createProduct,
-  getProduct,
+  getProducts,
   getProductById,
-  getProductByCategoryId,
+  getProductsByCategoryId,
   updateProduct,
   deleteProduct,
 } = require('../controllers/products.controller');
@@ -22,7 +22,7 @@ router
     rolesMiddleware(typeRole.OWNER),
     asyncMiddleware(createProduct),
   )
-  .get(asyncMiddleware(getProduct));
+  .get(asyncMiddleware(getProducts));
 router
   .route('/:id')
   .put(
@@ -38,5 +38,5 @@ router
   .get(asyncMiddleware(getProductById));
 router
   .route('/category/:category_Id')
-  .get(asyncMiddleware(getProductByCategoryId));
+  .get(asyncMiddleware(getProductsByCategoryId));
 module.exports = router;
