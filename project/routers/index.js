@@ -3,7 +3,9 @@ const categoryRouter = require('./category.router');
 const userRouter = require('./user.router');
 const productRouter = require('./product.router');
 const productImageRouter = require('./productImages.router');
-const cartRouter = require('./cart.router')
+const cartRouter = require('./cart.router');
+const orderRouter = require('./order.router');
+const commentRouter = require('./comment.router');
 const ErrorHandle = require('../middlewares/error.handle');
 
 module.exports = (app) => {
@@ -12,7 +14,9 @@ module.exports = (app) => {
   app.use('/api/accounts', userRouter);
   app.use('/api/products', productRouter);
   app.use('/api/products/images', productImageRouter);
-  app.use('/api/cart', cartRouter)
+  app.use('/api/cart', cartRouter);
+  app.use('/api/order', orderRouter);
+  app.use('/api/product/comment', commentRouter)
 
   app.use(ErrorHandle);
 };

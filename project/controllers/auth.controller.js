@@ -1,5 +1,6 @@
 require('dotenv').config();
 const userModel = require('../models/user.model');
+const blacklistModel = require('../models/blacklist.model');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const accountValid = require('../validations/account.valid');
@@ -25,14 +26,13 @@ module.exports = {
       role: user.role,
     };
     const token = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: '15m',
+      expiresIn: '20m',
     });
     return res.status(200).json({
       ...payload,
       token: token,
     });
   },
-
   register: async (req, res) => {
     const { username, password, fullname, email, phone, address } = req.body;
     const { error, value } = accountValid({
@@ -64,5 +64,23 @@ module.exports = {
 
     const newUser = await userModel.create(value);
     return res.status(201).json(newUser);
+  },
+  logout: async (req, res) => {
+    const { authorization } = req.headers;
+    const userId = req.user._id;
+    if (!userId) {
+      throw new ErrorResponse(400, 'user not logged in');
+    }
+    const checkIfBlacklisted = await blacklistModel.findOne({ userId: userId });
+    if (checkIfBlacklisted) {
+      throw new ErrorResponse(404, 'Unavailable');
+    }
+    const token = authorization.split(' ')[1];
+    const addBlackList = new blacklistModel({
+      token: token,
+      userId: userId,
+    });
+    await blacklistModel.create(addBlackList);
+    return res.status(200).json('logout success');
   },
 };

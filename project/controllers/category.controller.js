@@ -1,5 +1,4 @@
 const categoryModel = require('../models/categories.model');
-const ErrorResponse = require('../helpers/ErrorResponse');
 
 module.exports = {
   createCategory: async (req, res) => {

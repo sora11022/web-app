@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const typeStatus = require('../constants/type.status');
 
 const orderSchema = mongoose.Schema(
   {
@@ -15,18 +14,6 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    orderItem: [
-      {
-        quantity: {
-          type: Number,
-          required: true,
-        },
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'product',
-        },
-      },
-    ],
     orderStatus: {
       type: String,
       enum: [
@@ -42,14 +29,14 @@ const orderSchema = mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ['Cash, Transaction'],
+      enum: ['Cash', 'Transaction'],
       default: 'Cash',
     },
     cartId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'cart',
     },
-    userId: {
+    deliver: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     },

@@ -12,10 +12,10 @@ module.exports = async (req, res, next) => {
   const decode = jwt.verify(token, process.env.SECRET_KEY);
 
   const user = await userModel.findById(decode._id);
-
   if (!user) {
     throw new ErrorResponse(401, 'Account does not existed');
   }
+
   req.user = user;
-  next()
+  next();
 };

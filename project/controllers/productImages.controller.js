@@ -12,7 +12,6 @@ module.exports = {
     if (!existPrd) {
       throw new ErrorResponse(404, 'Invalid ProductId');
     }
-    await productModel.findByIdAndUpdate(product_id);
 
     const productImg = await productImageModel.create(body);
     return res.status(201).json(productImg);
